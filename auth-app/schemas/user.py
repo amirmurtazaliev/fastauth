@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 
 class UserBase(BaseModel):
+    initials: str = Field(max_length=100)
     email: EmailStr = Field(max_length=100)
     password: str = Field(min_length=6, max_length=100)
 
