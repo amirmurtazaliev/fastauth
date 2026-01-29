@@ -9,4 +9,5 @@ class User(Base):
     initials: Mapped[str] = mapped_column(nullable=False, index=True)
     email: Mapped[str] = mapped_column(unique=True, nullable=False, index=True)
     password: Mapped[str] = mapped_column(nullable=False)
+    is_active: Mapped[bool] = mapped_column(nullable=False, default=True)
     created_at: Mapped[datetime] = mapped_column(server_default=datetime.now)
