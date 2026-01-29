@@ -11,7 +11,7 @@ class CodeRepository:
         stmt = select(ConfCode).filter(ConfCode.user_email == email).order_by(ConfCode.id.desc)
         result = await self.session.execute(stmt)
         res = result.scalar_one_or_none()
-        return res.code
+        return res
 
     async def create_code(self, email: str, code: int) -> ConfCode:
         new_code = ConfCode(
