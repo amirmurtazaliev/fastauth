@@ -10,3 +10,6 @@ class UserCreate(UserBase):
 
 class UserResponse(UserBase):
     id: int = Field(...,description="Unique user identifier")
+    
+    class Config:
+        from_attributes = True

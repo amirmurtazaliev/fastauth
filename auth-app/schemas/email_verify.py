@@ -8,3 +8,6 @@ class SendConfCode(EmailVerifyBase):
 
 class EmailVerifyResponse(EmailVerifyBase):
     pass
+
+    class Config:
+        from_attributes = True
