@@ -27,3 +27,5 @@ class Password:
     
     def verify_password(self, plain_password: str, hashed_password: str) -> bool:
         return pwd_context.verify(plain_password, hashed_password)
+
+pwd_acts = Password()

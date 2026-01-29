@@ -1,12 +1,12 @@
 from pydantic import BaseModel, Field, EmailStr
 
-class EmailVerifyBase(BaseModel):
+class ConfCodeBase(BaseModel):
     email: str = Field(max_length=100)
     
-class SendConfCode(EmailVerifyBase):
-    pass
+class ConfCodeCreate(ConfCodeBase):
+    code: int
 
-class EmailVerifyResponse(EmailVerifyBase):
+class ConfCodeResponse(ConfCodeBase):
     pass
 
     class Config:
