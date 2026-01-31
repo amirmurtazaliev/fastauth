@@ -17,8 +17,11 @@ def init_db():
     
 async def get_session():
     session = SessionLocal()
-    yield session
-
+    try:
+        yield session
+    finally:
+        session.close()
+        
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class Password:

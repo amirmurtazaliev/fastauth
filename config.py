@@ -2,6 +2,10 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
+    #App
+    app_name: str = "FastAuth"
+    debug: bool = True
+    cors_origins: list = ["*"]
     # Database
     db_host: str = Field(default="localhost", env="DB_HOST")
     db_port: int = Field(default=5432, env="DB_PORT")
