@@ -1,9 +1,10 @@
 import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.user import user_router
+from .routes.user import user_router
 from .database import init_db
 from .config import settings
+from .models import *
 
 app = FastAPI(
     title=settings.app_name,
@@ -19,5 +20,10 @@ app.add_middleware(
 
 app.include_router(user_router)
 
-if __name__ == "__main__":
-    asyncio.run(init_db())
+@app.get('/')
+def root():
+    return {
+        "message": "Welcome to fastapi notification service!",
+        "docs": "/docs"}
+
+    
