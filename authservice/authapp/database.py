@@ -1,12 +1,8 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import settings
-
 import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from passlib.context import CryptContext
+from .config import settings
 
 async_engine = create_async_engine(
     url=settings.get_database_url,
