@@ -1,8 +1,8 @@
 import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .routes.email_verify import emailver_router
 from .routes.user import user_router
-from .database import init_db
 from .config import settings
 from .models import *
 
@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(emailver_router)
 
 @app.get('/')
 def root():

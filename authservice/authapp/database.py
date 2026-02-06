@@ -23,7 +23,7 @@ async def get_session():
     try:
         yield session
     finally:
-        session.close()
+        await session.close()
         
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

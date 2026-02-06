@@ -6,7 +6,7 @@ class HTTPClient:
             base_url = base_url
         )
         
-class DBHTTPClient(HTTPClient):
+class NotifyHTTPClient(HTTPClient):
     async def send_post_request(self, endpoint_url: str, json: dict):
         async with self._session.post(
             url = endpoint_url,
