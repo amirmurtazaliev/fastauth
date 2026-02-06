@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: psgr
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=mydata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - dbnet
+  
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "127.0.0.1:9000:8080"
+    links:
+      - "postgres:db"
+    networks:
+      - dbnet
+    depends_on:
+      - postgres
+
+  authservice:
+    build: ./authservice
+    image: auth-app
+    container_name: auth-container
+    links:
+      - "postgres:dbps"
+    networks:
+      - dbnet
+    ports:
+      - "127.0.0.1:8000:8080"
+    volumes:
+    - ./authservice:/app
+    depends_on:
+      - postgres
+
+  notifyservice:
+    build: ./notifyservice
+    image: notify-app
+    container_name: notify-container
+    networks:
+      - dbnet
+    ports:
+      - "127.0.0.1:8080:8000"
+    volumes:
+    - ./notifyservice:/app
+    depends_on:
+      - postgres
+
+networks:
+  dbnet:
+    driver: bridge
+
+volumes:
+  postgres-data:
