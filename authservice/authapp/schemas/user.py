@@ -6,7 +6,7 @@ class UserBase(BaseModel):
     password: str = Field(min_length=6, max_length=100)
 
 class UserCreate(UserBase):
-    code: int = Field(max_length=6)
+    code: int
 
 class UserResponse(UserBase):
     id: int = Field(...,description="Unique user identifier")
