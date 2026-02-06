@@ -8,7 +8,7 @@ class CodeRepository:
         self.session = session
         
     async def get_code_by_email(self, email: str) -> Optional[int]:
-        stmt = select(ConfCode).filter(ConfCode.user_email == email).order_by(ConfCode.id.desc)
+        stmt = select(ConfCode).filter(ConfCode.user_email == email).order_by(ConfCode.created_at.desc()).limit(1)
         result = await self.session.execute(stmt)
         res = result.scalar_one_or_none()
         return res
@@ -19,6 +19,6 @@ class CodeRepository:
             code=code
         )
         self.session.add(new_code)
-        self.session.commit()
-        self.session.refresh(new_code)
+        await self.session.commit()
+        await self.session.refresh(new_code)
         return new_code

@@ -25,7 +25,7 @@ class UserRepository:
             password=pwd_acts.get_password_hash(password)
         )
         self.session.add(new_user)
-        self.session.commit()
-        self.session.refresh(new_user)
+        await self.session.commit()
+        await self.session.refresh(new_user)
         return new_user
     
