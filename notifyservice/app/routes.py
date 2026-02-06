@@ -11,7 +11,7 @@ router = APIRouter(
 def send_msg(message_data: MessageData):
     is_sended = send_message(
         message_data.sender_name,
-        message_data.recipiemt_email,
+        message_data.recipient_email,
         message_data.message
         )
     if is_sended[0]:

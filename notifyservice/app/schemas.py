@@ -5,5 +5,5 @@ class Base(BaseModel):
 
 class MessageData(Base):
     sender_name: str = Field(max_length=100)
-    recipiemt_email: EmailStr = Field(max_length=100)
+    recipient_email: EmailStr = Field(max_length=100)
     message: str = Field(max_length=300)
