@@ -35,6 +35,8 @@ services:
       - "127.0.0.1:8000:8080"
     volumes:
     - ./authservice:/app
+    env_file:
+      - ./authservice/.env
     depends_on:
       - postgres
 
@@ -48,6 +50,8 @@ services:
       - "127.0.0.1:8080:8000"
     volumes:
     - ./notifyservice:/app
+    env_file:
+      - ./notifyservice/.env
     depends_on:
       - postgres
 
