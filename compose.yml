@@ -10,6 +10,11 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - dbnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mydata"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
   
   adminer:
     image: adminer
@@ -32,11 +37,17 @@ services:
     networks:
       - dbnet
     ports:
-      - "127.0.0.1:8000:8080"
+      - "127.0.0.1:8000:8000"
     volumes:
     - ./authservice:/app
     env_file:
       - ./authservice/.env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: mydata
+      DB_USER: postgres
+      DB_PASS: 1234
     depends_on:
       - postgres
 
@@ -47,13 +58,20 @@ services:
     networks:
       - dbnet
     ports:
-      - "127.0.0.1:8080:8000"
+      - "127.0.0.1:8080:7070"
     volumes:
     - ./notifyservice:/app
     env_file:
       - ./notifyservice/.env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: mydata
+      DB_USER: postgres
+      DB_PASS: 1234
     depends_on:
       - postgres
+    
 
 networks:
   dbnet:

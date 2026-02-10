@@ -7,7 +7,7 @@ from ..http_client import NotifyHTTPClient
 from ..database import get_session
 from ..config import settings
 
-http_client = NotifyHTTPClient("http://127.0.0.1:8000/api/")
+http_client = NotifyHTTPClient("http://127.0.0.1:8080/api/")
 
 emailver_router = APIRouter(
     prefix="/api/emailver",

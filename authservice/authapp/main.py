@@ -5,7 +5,7 @@ from .routes.email_verify import emailver_router
 from .routes.user import user_router
 from .config import settings
 from .models import *
-
+from .database import init_db
 app = FastAPI(
     title=settings.app_name,
     debug=settings.debug,
@@ -26,5 +26,9 @@ def root():
     return {
         "message": "Welcome to fastapi notification service!",
         "docs": "/docs"}
+    
+@app.post("/initdb")
+async def initdb():
+    return await init_db()
 
     
