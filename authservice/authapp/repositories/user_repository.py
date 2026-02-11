@@ -11,12 +11,13 @@ class UserRepository:
     async def get_user(self, email: str, password: str):
         stmt = (select(User)
                 .where(and_(User.email == email,
-                            pwd_acts
-                            .verify_password(password, User.password)))
+                            pwd_acts.verify_password(password, User.password)))
                 )
         result = await self.session.execute(stmt)
         user = result.scalar_one_or_none()
-        return user
+        if user:
+            return user.id
+        return None
     
     async def create_user(self, initials: str, email: str, password: str) -> User:
         new_user = User(

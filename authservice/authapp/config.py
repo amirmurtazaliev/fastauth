@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     
     # JWT
     jwt_secret_key: str
+    jwt_access_cookie_name: str
+    jwt_token_location: list
     
     class Config:
         env_file = ".env"
